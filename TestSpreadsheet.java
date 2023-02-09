@@ -4,6 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestSpreadsheet {
+    @Test
+    public void testSpreadsheetConstructor() {
+        Spreadsheet spreadsheet = new Spreadsheet(-1, 5);
+    }
 
     @Test
     public void testSetCellAt() {
@@ -44,8 +48,9 @@ public class TestSpreadsheet {
         Spreadsheet spreadsheet = new Spreadsheet(2,2);
         Cell cell = new Cell();
         spreadsheet.addColumn(new String[]{"1111", "2222"});
+        Assert.assertEquals(spreadsheet.getCellsColumns(), 3, "testRemoveColumnBefore");
         spreadsheet.removeColumn(2);
-        Assert.assertEquals(spreadsheet.getCellsColumns(), 2, "testRemoveColumn");
+        Assert.assertEquals(spreadsheet.getCellsColumns(), 2, "testRemoveColumnAfter");
     }
     @Test
     public void testSwapRows() {
