@@ -30,16 +30,24 @@ public class Spreadsheet {
     public Cell getCellAt(int row, int column) {
         return cells[row][column];
     }
-    public void addRow(String[] values) {
+    public void addRow(String[] values, int row) {
+        int newRowIndex = 0;
         Cell[] newRow = new Cell[columns];
         for (int i = 0; i < values.length; ++i) {
             newRow[i] = new Cell(values[i]);
         }
         Cell[][] newCells = new Cell[rows + 1][columns];
-        for (int i = 0; i < rows; ++i) {
-            newCells[i] = cells[i];
+        for (int i = 0; i < columns; ++i) {
+            for(int j = 0; j < rows; ++j) {
+                if (j == row) {
+                    continue;
+                }
+                newCells[j][i] = cells[newRowIndex][i];
+                ++newRowIndex;
+            }
+            newRowIndex = 0;
         }
-        newCells[rows] = newRow;
+        newCells[row] = newRow;
         cells = newCells;
         ++rows;
     }
@@ -56,18 +64,24 @@ public class Spreadsheet {
         cells = newCells;
         --rows;
     }
-    public void addColumn(String[] values) {
+    public void addColumn(String[] values, int column) {
         ++columns;
+        int newColumnIndex = 0;
         Cell[] newColumn = new Cell[rows];
         for (int i = 0; i < values.length; ++i) {
             newColumn[i] = new Cell(values[i]);
         }
         Cell[][] newCells = new Cell[rows][columns];
         for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < columns - 1; ++j) {
-                newCells[i][j] = cells[i][j];
+            for (int j = 0; j < columns; ++j) {
+                if (j == column) {
+                    continue;
+                }
+                newCells[i][j] = cells[i][newColumnIndex];
+                ++newColumnIndex;
             }
-            newCells[i][columns-1] = newColumn[i];
+            newCells[i][column] = newColumn[i];
+            newColumnIndex = 0;
         }
         cells = newCells;
     }
