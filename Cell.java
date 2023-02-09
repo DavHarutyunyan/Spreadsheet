@@ -65,4 +65,17 @@ public class Cell {
     }
 
 }
+class Main {
+    public static void main(String[] args) {
+        Spreadsheet spreadsheet = new Spreadsheet(2, 2);
+        spreadsheet.setCellAt(0, 0, new Cell("A"));
+        spreadsheet.setCellAt(0, 1, new Cell("B"));
+        spreadsheet.setCellAt(1, 0, new Cell("C"));
+        spreadsheet.setCellAt(1, 1, new Cell("D"));
+        System.out.println(spreadsheet.getCellAt(0, 0).getValue());
+//        spreadsheet.addColumn(new String[]{"0", "9"}, 0);
+        spreadsheet.addRow(new String[]{"0","1"}, 0);
+        System.out.println(spreadsheet.getCellAt(0, 0).getValue());
 
+    }
+}
