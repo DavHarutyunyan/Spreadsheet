@@ -1,9 +1,6 @@
 package org.spreadsheet;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.text.ParseException;
 import java.time.LocalDate;
 
 public class TestCell {
@@ -15,9 +12,8 @@ public class TestCell {
         Assert.assertEquals("1234", cell.getValue());
     }
     @Test
-    public void testToInt() throws ParseException {
+    public void testToInt() {
         Cell cell = new Cell("123");
-
         Assert.assertEquals(123, cell.toInt(cell.getValue()));
     }
     @Test
@@ -26,7 +22,7 @@ public class TestCell {
         Assert.assertEquals(1.5, cell.toDouble(cell.getValue()));
     }
     @Test
-    public void testToDate() throws ParseException {
+    public void testToDate() {
         Cell cell = new Cell("08/02/2023");
         Assert.assertEquals(cell.toDate(cell.getValue(), "dd/MM/yyyy"), LocalDate.parse("2023-02-08"));
     }
