@@ -15,7 +15,7 @@ public class TestCell {
         Assert.assertEquals("1234", cell.getValue());
     }
     @Test
-    public void testToInt() {
+    public void testToInt() throws ParseException {
         Cell cell = new Cell("123");
 
         Assert.assertEquals(123, cell.toInt(cell.getValue()));
