@@ -2,6 +2,7 @@ package org.spreadsheet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 public class Cell {
     private String value;
     private Color color;
@@ -28,17 +29,35 @@ public class Cell {
     }
 
     public int toInt(String value) {
-        int intValue = Integer.parseInt(value);
+        int intValue = 0;
+        try {
+            intValue = Integer.parseInt(value);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return intValue;
     }
 
     public double toDouble(String value) {
-        double doubleValue = Double.parseDouble(value);
+        double doubleValue = 0.0;
+        try {
+            doubleValue = Double.parseDouble(value);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return doubleValue;
     }
 
     public LocalDate toDate(String dateString, String dateFormat) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        DateTimeFormatter formatter = null;
+        try {
+            formatter = DateTimeFormatter.ofPattern(dateFormat);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return LocalDate.parse(dateString, formatter);
     }
     public void reset(Cell cell) {
@@ -46,9 +65,4 @@ public class Cell {
     }
 
 }
-class Main {
-    public static void main(String[] args) {
-        Cell cell = new Cell("08/02/2023");
-        System.out.println(cell.toDate(cell.getValue(), "dd/MM/yyyy"));
-    }
-}
+
