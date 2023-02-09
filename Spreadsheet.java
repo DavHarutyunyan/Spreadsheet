@@ -1,15 +1,18 @@
 package org.spreadsheet;
-
-import java.text.ParseException;
-
 public class Spreadsheet {
     private Cell[][] cells;
     private int rows;
     private int columns;
     Spreadsheet(int rows, int columns) {
-        this.rows = rows;
-        this.columns = columns;
-        cells = new Cell[rows][columns];
+        try {
+            this.rows = rows;
+            this.columns = columns;
+            cells = new Cell[rows][columns];
+        } catch (Exception e) {
+            if (rows < 0 || columns < 0) {
+                e.printStackTrace();
+            }
+        }
     }
     public int getCellsRows() {
         return cells[columns-1].length;
@@ -18,7 +21,7 @@ public class Spreadsheet {
         return cells[rows-1].length;
     }
     public void setCellAt(int row, int column, Cell cell) {
-        cells[row][column] = cell;
+            cells[row][column] = cell;
     }
     public void setCellValueAt(int row, int column, Cell cell, String value) {
         cell.setValue(value);
@@ -70,14 +73,17 @@ public class Spreadsheet {
     }
     public void removeColumn(int column) {
         --columns;
+        int newColumnIndex = 0;
         Cell[][] newCells = new Cell[rows][columns];
         for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < columns; ++j) {
+            for (int j = 0; j <= columns; ++j) {
                 if(j == column) {
                     continue;
                 }
-                newCells[i][j] = cells[i][j];
+                newCells[i][newColumnIndex] = cells[i][j];
+                ++newColumnIndex;
             }
+            newColumnIndex = 0;
         }
         cells = newCells;
     }
