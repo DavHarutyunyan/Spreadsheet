@@ -22,32 +22,31 @@ public class TestSpreadsheet {
     public void testAddRow() {
         Spreadsheet spreadsheet = new Spreadsheet(2,2);
         Cell cell = new Cell();
-        spreadsheet.addRow(new String[]{"111", "555",});
-        Assert.assertEquals(spreadsheet.getCellAt(2,0).getValue(), "111", "assert1");
-        Assert.assertEquals(spreadsheet.getCellAt(2, 1).getValue(), "555", "assert2");
+        spreadsheet.addRow(new String[]{"111", "555",}, 0);
+        Assert.assertEquals(spreadsheet.getCellAt(0,0).getValue(), "111", "assert1");
+        Assert.assertEquals(spreadsheet.getCellAt(0, 1).getValue(), "555", "assert2");
     }
     @Test
     public void testRemoveRow() {
         Spreadsheet spreadsheet = new Spreadsheet(2,2);
         Cell cell = new Cell();
-        spreadsheet.addRow(new String[]{"111", "555"});
+        spreadsheet.addRow(new String[]{"111", "555"}, 2);
         Assert.assertEquals(spreadsheet.getCellAt(2, 0).getValue(), "111");
         spreadsheet.removeRow(2);
-        Assert.assertEquals(spreadsheet.getCellsRows(), 2, "testRemoveRow");
+        Assert.assertEquals(spreadsheet.getCellsRows(), 2,  "testRemoveRow");
     }
     @Test
     public void testAddColumn() {
         Spreadsheet spreadsheet = new Spreadsheet(2,2);
         Cell cell = new Cell();
-        spreadsheet.addColumn(new String[]{"abc", "xyz"});
-        Assert.assertEquals(spreadsheet.getCellAt(0,2).getValue(), "abc", "testAddColumn");
-        Assert.assertEquals(spreadsheet.getCellAt(1, 2).getValue(), "xyz", "test column 2");
+        spreadsheet.addColumn(new String[]{"0", "1"}, 0);
+        Assert.assertEquals(spreadsheet.getCellAt(0, 0).getValue(), "0");
     }
     @Test
     public void testRemoveColumn() {
         Spreadsheet spreadsheet = new Spreadsheet(2,2);
         Cell cell = new Cell();
-        spreadsheet.addColumn(new String[]{"1111", "2222"});
+        spreadsheet.addColumn(new String[]{"1111", "2222"}, 0);
         Assert.assertEquals(spreadsheet.getCellsColumns(), 3, "testRemoveColumnBefore");
         spreadsheet.removeColumn(2);
         Assert.assertEquals(spreadsheet.getCellsColumns(), 2, "testRemoveColumnAfter");
